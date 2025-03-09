@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cm0u158wup70l"
+path="res://.godot/imported/BGAXE.obj-cb38d39adf1d3b8613935de282df259c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/BGAXE.obj-cb38d39adf1d3b8613935de282df259c.mesh"]
+
+source_file="res://blender assets/BGAXE.obj"
+dest_files=["res://.godot/imported/BGAXE.obj-cb38d39adf1d3b8613935de282df259c.mesh", "res://.godot/imported/BGAXE.obj-cb38d39adf1d3b8613935de282df259c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

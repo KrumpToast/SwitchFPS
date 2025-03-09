@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://cglifgbypnerc"]
+
+[ext_resource type="PackedScene" uid="uid://bwfdxmwo1x6bt" path="res://scenes/character_body_3d.tscn" id="1_6ptya"]
+[ext_resource type="Script" path="res://game.gd" id="1_fvhay"]
+[ext_resource type="Texture2D" uid="uid://bra1hirg4u6cc" path="res://assets/overcast_soil_puresky_4k.exr" id="2_6o28a"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_pjb6j"]
+panorama = ExtResource("2_6o28a")
+
+[sub_resource type="Sky" id="Sky_q1kdq"]
+sky_material = SubResource("PanoramaSkyMaterial_pjb6j")
+
+[sub_resource type="Environment" id="Environment_n8iis"]
+background_mode = 2
+sky = SubResource("Sky_q1kdq")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_fvhay")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_n8iis")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_6ptya")]
+
+[node name="GameLand" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="GameLand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.45062, -0.7083, 1.76135)
+size = Vector3(14.1307, 0.208496, 8.33374)
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

@@ -1,0 +1,14 @@
+# Blender 4.1.1 MTL File: 'brokenRustRevolver(1).blend'
+# www.blender.org
+
+newmtl Material.001
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 3
+map_Kd C:/Users/olive/Downloads/Material.001_BaseColor.1001.png
+map_Ns C:/Users/olive/Downloads/Material.001_Roughness.1001.png
+map_refl C:/Users/olive/OneDrive/Pictures/tool gun skin.jpg
+map_d C:/Users/olive/Downloads/Material.001_Alpha.1001.png
+map_Bump -bm 1.000000 C:/Users/olive/Downloads/Material.001_Normal.1001.png

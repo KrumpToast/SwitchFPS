@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://luxrx5dyigj7"]
+
+[ext_resource type="Texture2D" uid="uid://cct5b2jl2gxh8" path="res://assets/START-removebg-preview.png" id="1_83k8f"]
+
+[sub_resource type="GDScript" id="GDScript_bp47u"]
+script/source = "extends Button
+
+func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+func _on_pressed():
+	get_tree().change_scene_to_file(\"res://game.tscn\")
+"
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.835025, 0.871155, 0.940171, 1)
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 462.0
+offset_top = 253.0
+offset_right = 1223.0
+offset_bottom = 592.0
+scale = Vector2(0.288067, 0.370271)
+icon = ExtResource("1_83k8f")
+icon_alignment = 1
+script = SubResource("GDScript_bp47u")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

@@ -1,0 +1,22 @@
+# Blender 4.1.1 MTL File: '1(1).blend'
+# www.blender.org
+
+newmtl Material
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.057805 0.012983 0.002428
+Ks 0.390909 0.390909 0.390909
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Material.001
+Ns 836.393311
+Ka 0.770909 0.770909 0.770909
+Ks 0.863636 0.863636 0.863636
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:/Users/olive/OneDrive/Pictures/tool gun skin.jpg

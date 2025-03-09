@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://u2k5t24mh20t"
+path="res://.godot/imported/BlendedBayModule.obj-cd80ec118967a112162b587653535474.mesh"
+
+[deps]
+
+files=["res://.godot/imported/BlendedBayModule.obj-cd80ec118967a112162b587653535474.mesh"]
+
+source_file="res://blender assets/BlendedBayModule.obj"
+dest_files=["res://.godot/imported/BlendedBayModule.obj-cd80ec118967a112162b587653535474.mesh", "res://.godot/imported/BlendedBayModule.obj-cd80ec118967a112162b587653535474.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

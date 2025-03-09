@@ -1,0 +1,180 @@
+[gd_scene load_steps=12 format=3 uid="uid://bwfdxmwo1x6bt"]
+
+[ext_resource type="Script" path="res://CharacterBody3D.gd" id="1_vpwy7"]
+[ext_resource type="Script" path="res://scenes/BulletCenter.gd" id="3_k46gs"]
+[ext_resource type="PackedScene" uid="uid://rbffpduh2rd8" path="res://gun.tscn" id="4_74qqj"]
+[ext_resource type="Script" path="res://scenes/center_container.gd" id="5_imymm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_so3i1"]
+
+[sub_resource type="Animation" id="Animation_htqvo"]
+resource_name = "CrouchToCrawl"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.3, 0), Vector3(0, -0.8, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qn5j2"]
+resource_name = "Reset"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cnp00"]
+resource_name = "StandingToCrawl"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.8, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hkgfq"]
+resource_name = "StandingToCrouch"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.3, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cxy1k"]
+_data = {
+"CrouchToCrawl": SubResource("Animation_htqvo"),
+"Reset": SubResource("Animation_qn5j2"),
+"StandingToCrawl": SubResource("Animation_cnp00"),
+"StandingToCrouch": SubResource("Animation_hkgfq")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qnejw"]
+radius = 0.4
+height = 1.5
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_vpwy7")
+
+[node name="StandingCollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_so3i1")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.849496, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+cull_mask = 1048573
+
+[node name="TextureRect" type="TextureRect" parent="Head/Camera3D"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WeaponRig" type="Node3D" parent="Head/Camera3D"]
+
+[node name="GUN" parent="Head/Camera3D" instance=ExtResource("4_74qqj")]
+transform = Transform3D(-8.57034e-05, 0, 0.0222186, 0, 0.0222188, 0, -0.0222186, 0, -8.57034e-05, 0.242422, -0.214512, -0.462516)
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, -500)
+script = ExtResource("3_k46gs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cxy1k")
+}
+
+[node name="CrawlCollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.968123, 0.182918, -0.171111, 0.170841, 0.0173543, 0.985146, 0.18317, -0.982975, -0.0144487, 0, -0.600651, 0.337044)
+shape = SubResource("CapsuleShape3D_qnejw")
+
+[node name="UIR" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="UIR" node_paths=PackedStringArray("RETICLE_LINES", "PLAYER_CONTROLLER")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_imymm")
+RETICLE_LINES = [NodePath("Top"), NodePath("Right"), NodePath("Bottom"), NodePath("Left")]
+PLAYER_CONTROLLER = NodePath("../..")
+RETICLE_SPEED = 0.15
+RETICLE_DISTANCE = 3.0
+DOT_COLOR = Color(0, 0, 0, 1)
+
+[node name="Top" type="Line2D" parent="UIR/CenterContainer"]
+points = PackedVector2Array(0, -5, 0, -10)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Bottom" type="Line2D" parent="UIR/CenterContainer"]
+points = PackedVector2Array(0, 5, 0, 10)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Right" type="Line2D" parent="UIR/CenterContainer"]
+points = PackedVector2Array(5, 0, 10, 0)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Left" type="Line2D" parent="UIR/CenterContainer"]
+points = PackedVector2Array(-5, 0, -10, 0)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="UIR"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(1, 1)
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
